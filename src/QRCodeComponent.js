@@ -2,7 +2,9 @@ import React from 'react';
 import QRCode from 'qrcode.react';
 
 const QRCodeComponent = () => {
-  const trackQRUrl = '/.netlify/functions/track-qr';
+  const netlifyFunctionPath = '/.netlify/functions/track-qr';
+  const netlifyDomain = 'https://cbuevents.netlify.app';
+  const trackQRUrl = netlifyDomain + netlifyFunctionPath;
 
   return (
     <div>
