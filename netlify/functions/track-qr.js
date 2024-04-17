@@ -8,9 +8,19 @@ const connection = mysql.createConnection({
   database: 'qrcode'
 });
 
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 exports.handler = async (event) => {
   const timestamp = new Date().toISOString();
-  const requestId = crypto.randomBytes(8).toString('hex');
+  const requestId = generateRandomString(8); // Generate a random 8-character string
 
   // Connect to the MySQL database
   connection.connect();
@@ -31,11 +41,11 @@ exports.handler = async (event) => {
   // Close the database connection
   connection.end();
 
-  // Optional: Return a response to redirect scanners
+  // Redirect scanners to a different site
   return {
     statusCode: 301,
     headers: {
-      Location: 'https://cbuevents.netlify.app', // Redirect scanners to your site
+      Location: 'https://calbaptist.edu/', // Replace with the desired redirect URL
     },
   };
 };
