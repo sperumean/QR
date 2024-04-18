@@ -36,13 +36,15 @@ exports.handler = async (event) => {
 
     console.log('Connected to MySQL database successfully!');
 
-    // Close the database connection
-    connection.end();
+
   });
 
   // Return a simple response
   return {
     statusCode: 200,
     body: 'Function executed successfully',
+
+    // Close the database connection
+    connection.end();
   };
 };
