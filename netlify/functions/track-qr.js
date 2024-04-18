@@ -9,6 +9,7 @@ const connection = mysql.createConnection({
   connectTimeout: 60000, // Increase the timeout to 60 seconds (60000 ms)
 });
 
+
 function generateRandomString(length) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -20,9 +21,6 @@ function generateRandomString(length) {
 }
 
 exports.handler = async (event) => {
-  const timestamp = new Date().toISOString();
-  const requestId = generateRandomString(8);
-
   console.log('Connecting to MySQL database...');
 
   // Connect to the MySQL database
@@ -36,31 +34,15 @@ exports.handler = async (event) => {
       };
     }
 
-    console.log('Connected to MySQL database. Inserting scan record...');
+    console.log('Connected to MySQL database successfully!');
 
-    // Insert a new record into the qr_scans table
-    connection.query(
-      'INSERT INTO qr_scans (timestamp, request_id) VALUES (?, ?)',
-      [timestamp, requestId],
-      (error, results) => {
-        if (error) {
-          console.error('Error inserting scan log:', error);
-        } else {
-          console.log('Scan record inserted successfully');
-          console.log('QR Code scanned at:', timestamp, 'Request ID:', requestId);
-        }
-
-        // Close the database connection
-        connection.end();
-      }
-    );
+    // Close the database connection
+    connection.end();
   });
 
-  // Redirect scanners to a different site
+  // Return a simple response
   return {
-    statusCode: 301,
-    headers: {
-      Location: 'https://www.calbaptist.edu',
-    },
+    statusCode: 200,
+    body: 'Function executed successfully',
   };
 };
