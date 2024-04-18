@@ -71,14 +71,5 @@ exports.handler = async (event) => {
       statusCode: 500,
       body: 'Internal Server Error',
     };
-  } finally {
-    // Close the database connection when the function is about to exit
-    connection.end((err) => {
-      if (err) {
-        console.error('Error closing MySQL connection:', err);
-      } else {
-        console.log('MySQL connection closed.');
-      }
-    });
   }
 };
