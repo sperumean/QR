@@ -9,7 +9,6 @@ const connection = mysql.createConnection({
   connectTimeout: 60000, // Increase the timeout to 60 seconds (60000 ms)
 });
 
-
 function generateRandomString(length) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -35,16 +34,14 @@ exports.handler = async (event) => {
     }
 
     console.log('Connected to MySQL database successfully!');
-
-
   });
 
   // Return a simple response
   return {
     statusCode: 200,
     body: 'Function executed successfully',
-
-    // Close the database connection
-    connection.end();
   };
+
+  // Close the database connection
+  connection.end();
 };
