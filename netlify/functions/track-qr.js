@@ -8,6 +8,16 @@ const connection = mysql.createConnection({
   database: 'qrcode'
 });
 
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 exports.handler = async (event) => {
   const timestamp = new Date().toISOString();
   const requestId = generateRandomString(8);
