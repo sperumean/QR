@@ -5,11 +5,18 @@ const connection = mysql.createConnection({
   host: '47.153.42.179',
   user: 'steven',
   password: 'Spiderman57#',
-  database: 'qrcode',
-  connectTimeout: 30000, // Increase the timeout to 30 seconds
+  database: 'qrcode'
 });
 
-// ... generateRandomString function ...
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 exports.handler = async (event) => {
   const timestamp = new Date().toISOString();
