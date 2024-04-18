@@ -54,12 +54,11 @@ exports.handler = async (event) => {
             console.log('Scan record inserted successfully.');
             resolve();
           }
+          // Close the database connection
+          connection.end();
         }
       );
     });
-
-    // Close the database connection
-    connection.end();
 
     // Redirect scanners to a different site
     return {
