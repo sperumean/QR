@@ -5,9 +5,8 @@ const connection = mysql.createConnection({
   host: '47.153.42.179',
   user: 'steven',
   password: 'Spiderman57#',
-  database: 'qrcode'
+  database: 'qrcode',
   connectTimeout: 60000, // Increase the timeout to 60 seconds (60000 ms)
-
 });
 
 function generateRandomString(length) {
