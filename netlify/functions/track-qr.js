@@ -19,7 +19,7 @@ function generateRandomString(length) {
 }
 
 exports.handler = async (event) => {
-  const timestamp = new Date().toISOString();
+  const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
   const requestId = generateRandomString(8);
 
   console.log('Connecting to MySQL database...');
