@@ -20,10 +20,14 @@ function generateRandomString(length) {
 
 exports.handler = async (event) => {
   const timestamp = new Date().toISOString();
-  const requestId = generateRandomString(8); // Generate a random 8-character string
+  const requestId = generateRandomString(8);
+
+  console.log('Connecting to MySQL database...');
 
   // Connect to the MySQL database
   connection.connect();
+
+  console.log('Connected to MySQL database. Inserting scan record...');
 
   // Insert a new record into the qr_scans table
   connection.query(
@@ -45,7 +49,7 @@ exports.handler = async (event) => {
   return {
     statusCode: 301,
     headers: {
-      Location: 'https://calbaptist.edu/', // Replace with the desired redirect URL
+      Location: 'https://www.calbaptist.edu', // Replace with the desired redirect URL
     },
   };
 };
