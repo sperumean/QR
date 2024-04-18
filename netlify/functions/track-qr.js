@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: '47.153.42.179',
   user: 'steven',
   password: 'Spiderman57#',
-  database: 'qrcode'
+  database: 'qrcode',
 });
 
 function generateRandomString(length) {
@@ -54,8 +54,6 @@ exports.handler = async (event) => {
             console.log('Scan record inserted successfully.');
             resolve();
           }
-          // Close the database connection
-          connection.end();
         }
       );
     });
@@ -73,5 +71,14 @@ exports.handler = async (event) => {
       statusCode: 500,
       body: 'Internal Server Error',
     };
+  } finally {
+    // Close the database connection when the function is about to exit
+    connection.end((err) => {
+      if (err) {
+        console.error('Error closing MySQL connection:', err);
+      } else {
+        console.log('MySQL connection closed.');
+      }
+    });
   }
 };
